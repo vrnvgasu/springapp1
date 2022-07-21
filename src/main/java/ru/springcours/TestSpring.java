@@ -10,9 +10,11 @@ public class TestSpring {
     );
 
     // указываем имя бина и класс, который будем реализовывать
-    TestBean testBean = context.getBean("testBean", TestBean.class);
+    Music music = context.getBean("musicBean", Music.class);  // указали общий интерфейс Music
 
-    System.out.println(testBean.getName());
+    // выполним DI вручную
+    MusicPlayer musicPlayer = new MusicPlayer(music);
+    musicPlayer.playMusic();
 
     // обязательно закрывать контекст
     context.close();
