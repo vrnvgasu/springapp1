@@ -9,11 +9,8 @@ public class TestSpring {
             "applicationContext.xml"
     );
 
-    // указываем имя бина и класс, который будем реализовывать
-    Music music = context.getBean("musicBean", Music.class);  // указали общий интерфейс Music
-
-    // выполним DI вручную
-    MusicPlayer musicPlayer = new MusicPlayer(music);
+    // выполним DI music в musicPlayer через контекст
+    MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
     musicPlayer.playMusic();
 
     // обязательно закрывать контекст
