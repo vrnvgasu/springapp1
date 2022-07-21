@@ -7,13 +7,37 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="musicBean"
+    <!--classpath: - файлы из папки resources-->
+    <!--Указываем файл из которого можем брать значения для DI-->
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <bean id="rockMusicBean"
+          class="ru.springcours.RockMusic">
+    </bean>
+    <bean id="classicalMusicBean"
           class="ru.springcours.ClassicalMusic">
     </bean>
 
     <bean id="musicPlayer"
           class="ru.springcours.MusicPlayer">
         <!--Внедряемм объект musicBean в конструктор-->
-        <constructor-arg ref="musicBean"/>
+        <!--        <constructor-arg ref="musicBean"/>-->
+
+        <!--Внедряемм 2 объекта/бина в сеттер setMusic через ссылку на объект-->
+        <property name="music">
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusicBean"/>
+            </list>
+        </property>
+
+        <!--Внедряемм значение "Some name" в сеттер setName-->
+        <!--        <property name="name" value="Some name"/>-->
+        <!--Внедряемм значение "Some name" в сеттер setVolume-->
+        <!--        <property name="volume" value="50"/>-->
+
+        <!--Внедряем значения в сетторы из файла в ресурсах-->
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 </beans>

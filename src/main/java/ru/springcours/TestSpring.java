@@ -12,6 +12,8 @@ public class TestSpring {
     // выполним DI music в musicPlayer через контекст
     MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
     musicPlayer.playMusic();
+    System.out.println(musicPlayer.getName());
+    System.out.println(musicPlayer.getVolume());
 
     // обязательно закрывать контекст
     context.close();
