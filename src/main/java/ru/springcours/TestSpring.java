@@ -1,13 +1,16 @@
 package ru.springcours;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSpring {
   public static void main(String[] args) {
     // подтягиваем из зависимости spring-context
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-            "applicationContext.xml"
-    );
+    AnnotationConfigApplicationContext context =
+            new AnnotationConfigApplicationContext(SpringConfig.class);
+//    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//            "applicationContext.xml"
+//    );
 
     MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
     System.out.println(musicPlayer.getName());

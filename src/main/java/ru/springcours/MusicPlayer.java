@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+import java.util.List;
+
+//@Component
 public class MusicPlayer {
 
   //DI значения из ресурса
@@ -14,8 +16,7 @@ public class MusicPlayer {
   @Value("${musicPlayer.volume}")
   private int volume;
 
-  private Music music1;
-  private Music music2;
+  private List<Music> musics;
 
   public String getName() {
     return name;
@@ -26,15 +27,17 @@ public class MusicPlayer {
   }
 
   // IoC
-  @Autowired // ищет подходящие бины
+//  @Autowired // ищет подходящие бины
   // @Qualifier явно указываем бины при неоднозначности
-  public MusicPlayer(@Qualifier("musicBean") Music music1,
-                     @Qualifier("classicalMusic") Music music2) {
-    this.music1 = music1;
-    this.music2 = music2;
+  public MusicPlayer(List<Music> musics) {
+    this.musics = musics;
   }
 
   public String playMusic() {
-    return music1.getSong() + "; \n" + music2.getSong();
+    StringBuilder result = new StringBuilder();
+    for (Music music: musics) {
+      result.append(music).append("/n");
+    }
+    return result.toString();
   }
 }

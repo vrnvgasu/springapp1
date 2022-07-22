@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
+//@Component
 //@Scope("prototype") // по умолчанию задан singleton
 public class ClassicalMusic implements Music {
   // ограничем создание объект через new
