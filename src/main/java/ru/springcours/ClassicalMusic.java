@@ -2,7 +2,7 @@ package ru.springcours;
 
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class ClassicalMusic implements Music {
   // ограничем создание объект через new
   private ClassicalMusic() {}
