@@ -9,11 +9,14 @@ public class TestSpring {
             "applicationContext.xml"
     );
 
-    // выполним DI music в musicPlayer через контекст
+    // вызовем два раза бин со скоупом singltone / prototype
     MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-    musicPlayer.playMusic();
-    System.out.println(musicPlayer.getName());
-    System.out.println(musicPlayer.getVolume());
+    MusicPlayer secondMusicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+    // проверим, что 2 переменные ссылаются на один и тот же объект
+    // singltone - true
+    // prototype - false
+    System.out.println(musicPlayer == secondMusicPlayer);
+
 
     // обязательно закрывать контекст
     context.close();

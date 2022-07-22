@@ -19,7 +19,8 @@
     </bean>
 
     <bean id="musicPlayer"
-          class="ru.springcours.MusicPlayer">
+          class="ru.springcours.MusicPlayer"
+          scope="prototype"><!--задаем область видимости (по умолчанию - singltone)-->
         <!--Внедряемм объект musicBean в конструктор-->
         <!--        <constructor-arg ref="musicBean"/>-->
 
