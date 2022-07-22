@@ -1,45 +1,28 @@
 package ru.springcours;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MusicPlayer {
-//  private Music music;
-  private List<Music> musics = new ArrayList<>();
-  private String name;
-  private int volume;
+  @Autowired // DI для поля через рефлексию
+  private Music music;
 
   public MusicPlayer() {
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getVolume() {
-    return volume;
-  }
-
-  public void setVolume(int volume) {
-    this.volume = volume;
-  }
-
   // IoC
-  public MusicPlayer(List<Music> musics) {
-    this.musics = musics;
-  }
+//  @Autowired // ищет подходящие бины
+//  public MusicPlayer(Music music) {
+//    this.music = music;
+//  }
 
-  public void setMusic(List<Music> musics) {
-    this.musics = musics;
-  }
+//  @Autowired // ищет подходящие бины по интерфейсу Music для сеттера
+//  public void setMusic(Music music) {
+//    this.music = music;
+//  }
 
-  public void playMusic() {
-    for (Music music: this.musics) {
-      System.out.println("Play: " + music.getSong());
-    }
+  public String playMusic() {
+    return music.getSong();
   }
 }
