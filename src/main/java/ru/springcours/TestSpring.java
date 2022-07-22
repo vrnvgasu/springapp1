@@ -9,8 +9,14 @@ public class TestSpring {
             "applicationContext.xml"
     );
 
-    // отработаю методы init в начале (doMyInit()) и destroy (doMyDestroy()) в конце из контекста
-     ClassicalMusic classicalMusic = context.getBean("classicalMusicBean", ClassicalMusic.class);
+    Music music = context.getBean("musicBean", Music.class);
+    System.out.println(music.getSong());
+
+    Music music2 = context.getBean("classicalMusic", Music.class);
+    System.out.println(music2.getSong());
+
+//    // отработаю методы init в начале (doMyInit()) и destroy (doMyDestroy()) в конце из контекста
+//     ClassicalMusic classicalMusic = context.getBean("classicalMusicBean", ClassicalMusic.class);
 
 //    // вызовем два раза бин со скоупом singltone / prototype
 //    MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);

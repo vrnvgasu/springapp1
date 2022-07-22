@@ -7,36 +7,45 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--Указываем пакет, который будем сканировать на наличие комментариев-->
+    <context:component-scan base-package="ru.springcours"/>
+
+
+
     <!--classpath: - файлы из папки resources-->
     <!--Указываем файл из которого можем брать значения для DI-->
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="rockMusicBean"
-          class="ru.springcours.RockMusic">
-    </bean>
-    <bean id="classicalMusicBean"
-          class="ru.springcours.ClassicalMusic"
-          factory-method="getClassicalMusic"
-          init-method="doMyInit"
-          destroy-method="doMyDestroy"> <!--указываем методы после запуска приложения и после его остановки -->
+
+
+
+    <!-- Задаем бины вручную (без сканирования пакета на компоненты) -->
+<!--    <bean id="rockMusicBean"-->
+<!--          class="ru.springcours.RockMusic">-->
+<!--    </bean>-->
+<!--    <bean id="classicalMusicBean"-->
+<!--          class="ru.springcours.ClassicalMusic"-->
+<!--          factory-method="getClassicalMusic"-->
+<!--          init-method="doMyInit"-->
+<!--          destroy-method="doMyDestroy"> &lt;!&ndash;указываем методы после запуска приложения и после его остановки &ndash;&gt;-->
         <!--Также указали, что создаем класс не через new, а через фабричный метод getClassicalMusic-->
         <!--Для prototype destroy НЕ ВЫЗВАЕТСЯ-->
         <!--Для prototype init вызывается каждый раз при создании объекта через контекст-->
-    </bean>
+<!--    </bean>-->
 
-    <bean id="musicPlayer"
-          class="ru.springcours.MusicPlayer"
-          scope="prototype"><!--задаем область видимости (по умолчанию - singltone)-->
+<!--    <bean id="musicPlayer"-->
+<!--          class="ru.springcours.MusicPlayer"-->
+<!--          scope="prototype">&lt;!&ndash;задаем область видимости (по умолчанию - singltone)&ndash;&gt;-->
         <!--Внедряемм объект musicBean в конструктор-->
         <!--        <constructor-arg ref="musicBean"/>-->
 
         <!--Внедряемм 2 объекта/бина в сеттер setMusic через ссылку на объект-->
-        <property name="music">
-            <list>
-                <ref bean="rockMusicBean"/>
-                <ref bean="classicalMusicBean"/>
-            </list>
-        </property>
+<!--        <property name="music">-->
+<!--            <list>-->
+<!--                <ref bean="rockMusicBean"/>-->
+<!--                <ref bean="classicalMusicBean"/>-->
+<!--            </list>-->
+<!--        </property>-->
 
         <!--Внедряемм значение "Some name" в сеттер setName-->
         <!--        <property name="name" value="Some name"/>-->
@@ -44,7 +53,7 @@
         <!--        <property name="volume" value="50"/>-->
 
         <!--Внедряем значения в сетторы из файла в ресурсах-->
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+<!--        <property name="name" value="${musicPlayer.name}"/>-->
+<!--        <property name="volume" value="${musicPlayer.volume}"/>-->
+<!--    </bean>-->
 </beans>
