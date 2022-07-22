@@ -2,16 +2,28 @@ package ru.springcours;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
-//  @Autowired // DI для поля через рефлексию
-//  @Qualifier("classicalMusic") // 2 бина отвечают интерфейсу Music. Убираем неоднозначность
-//  private Music music;
+
+  //DI значения из ресурса
+  @Value("${musicPlayer.name}")
+  private String name;
+  @Value("${musicPlayer.volume}")
+  private int volume;
 
   private Music music1;
   private Music music2;
+
+  public String getName() {
+    return name;
+  }
+
+  public int getVolume() {
+    return volume;
+  }
 
   // IoC
   @Autowired // ищет подходящие бины
@@ -21,11 +33,6 @@ public class MusicPlayer {
     this.music1 = music1;
     this.music2 = music2;
   }
-
-//  @Autowired // ищет подходящие бины по интерфейсу Music для сеттера
-//  public void setMusic(Music music) {
-//    this.music = music;
-//  }
 
   public String playMusic() {
     return music1.getSong() + "; \n" + music2.getSong();
