@@ -15,7 +15,13 @@
           class="ru.springcours.RockMusic">
     </bean>
     <bean id="classicalMusicBean"
-          class="ru.springcours.ClassicalMusic">
+          class="ru.springcours.ClassicalMusic"
+          factory-method="getClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"> <!--указываем методы после запуска приложения и после его остановки -->
+        <!--Также указали, что создаем класс не через new, а через фабричный метод getClassicalMusic-->
+        <!--Для prototype destroy НЕ ВЫЗВАЕТСЯ-->
+        <!--Для prototype init вызывается каждый раз при создании объекта через контекст-->
     </bean>
 
     <bean id="musicPlayer"
